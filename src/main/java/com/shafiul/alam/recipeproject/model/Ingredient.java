@@ -1,6 +1,7 @@
 package com.shafiul.alam.recipeproject.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class Ingredient {
@@ -10,11 +11,21 @@ public class Ingredient {
     private Long id;
 
     private String description;
+
+    private BigDecimal amount;
+
     @ManyToOne
     private Recipe recipe;
 
     @OneToOne
     private UnitOfMeasure uom;
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.recipe = recipe;
+        this.uom = uom;
+    }
 
     public Long getId() {
         return id;
@@ -30,6 +41,14 @@ public class Ingredient {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Recipe getRecipe() {
